@@ -205,7 +205,7 @@ function feval(x)
             pi, mu, sigma = unpack(output_y[t])
 
             input_crit[t] = {pi:float(), mu:float(), sigma:float(),
-            cmaskMat[{{},{},{t}}]:float(), x_target:float(), eps}
+            cmaskMat[{{},{},{t}}]:float(), x_target:float(), eps:float()}
 
             -- input_crit[t] = {pi:cuda(), mu:cuda(), sigma:cuda(),
             -- cmaskMat[{{},{},{t}}]:cuda(), x_target:cuda(), eps}
