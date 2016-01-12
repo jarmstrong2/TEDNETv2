@@ -18,7 +18,7 @@ function Window:updateOutput(input)
     
     local alphas_t = torch.exp(hat_alphas_t):cuda()
     local betas_t = torch.exp(hat_betas_t):cuda()
-    local kappas_t = self.kappas_t_1 + torch.exp(hat_kappas_t):cuda()
+    local kappas_t = self.kappas_t_1 + (torch.exp(hat_kappas_t):cuda()/25)
     
     local sampleSize = (#alphas_t)[1]
     
@@ -119,6 +119,7 @@ function Window:updateGradInput(input, gradOutput)
     
     --compute dl_dkappas_hat
     local dl_dkappas_hat = torch.cmul(torch.exp(hat_kappas_t), dl_dkappas)
+    dl_dkappas_hat = dl_dkappas_hat/25
    
     local grad_input = torch.cat(dl_dalphas_hat:float(), torch.cat(dl_dbetas_hat:float(), dl_dkappas_hat:float(), 2), 2):squeeze()
     local grad_context = context:clone():zero()
