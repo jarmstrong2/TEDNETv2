@@ -1,4 +1,4 @@
-require 'cutorch'
+--require 'cutorch'
 require 'cunn'
 require 'nn'
 require 'nngraph'
