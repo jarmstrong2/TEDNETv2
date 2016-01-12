@@ -45,6 +45,9 @@ count = 1
 
 batchCount = nil
 
+eps = torch.ones(opt.batchSize,opt.inputSize*opt.numMixture):cuda()
+eps = eps * 1e-8
+
 function getInitW(cuMat)
     cuMatClone = cuMat:clone()
     return torch.zero(cuMatClone[{{},{1},{}}]:squeeze(2))
@@ -109,7 +112,7 @@ function getValLoss()
             --loss = clones.criterion[t]:forward({pi:float(), mu:float(), u:float(),
             --    cmaskMat[{{},{},{t}}]:float(), x_target:float()}):sum() + loss  
             loss = clones.criterion[t]:forward({pi:cuda(), mu:cuda(), sigma:cuda(),
-                cmaskMat[{{},{},{t}}]:cuda(), x_target:cuda()}):sum() + loss       
+                cmaskMat[{{},{},{t}}]:cuda(), x_target:cuda(), eps}):sum() + loss       
         end
 
         loss = loss/(valsampleSize * valnumberOfPasses)
@@ -205,7 +208,7 @@ function feval(x)
             --cmaskMat[{{},{},{t}}]:float(), x_target:float()}
 
             input_crit[t] = {pi:cuda(), mu:cuda(), sigma:cuda(),
-            cmaskMat[{{},{},{t}}]:cuda(), x_target:cuda()}
+            cmaskMat[{{},{},{t}}]:cuda(), x_target:cuda(), eps}
 
             loss = clones.criterion[t]:forward(input_crit[t]):sum() + loss 
         end
