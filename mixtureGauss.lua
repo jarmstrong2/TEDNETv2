@@ -27,7 +27,7 @@ function mixture.gauss(inputSize, nMixture)
         mu_set = nn.SelectTable(i)(mu_pack)
         pi_set = nn.SelectTable(i)(pi_pack)
 
-        sigma_set_eps = nn.CAddTable()(sigma_set, eps})
+        sigma_set_eps = nn.CAddTable()({sigma_set, eps})
 
         det_log_sigma_set = nn.Sum(2,2)(nn.Log()(sigma_set_eps))
         inv_sigma = nn.Power(-1)(sigma_set)
