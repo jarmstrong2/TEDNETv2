@@ -45,7 +45,7 @@ count = 1
 
 batchCount = nil
 
-eps = torch.ones(opt.batchSize,1,opt.inputSize*opt.numMixture)
+eps = torch.ones(1,1,opt.inputSize)
 eps = eps * 1e-8
 
 function getInitW(cuMat)
