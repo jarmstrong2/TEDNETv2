@@ -1,5 +1,5 @@
 --require 'cutorch'
-require 'cunn'
+--require 'cunn'
 require 'nn'
 require 'nngraph'
 require 'torch'
@@ -30,7 +30,7 @@ function mixture.gauss(inputSize, nMixture)
         sigma_set_eps = nn.CAddTable()({sigma_set, eps})
 
         det_log_sigma_set = nn.Sum(2,2)(nn.Log()(sigma_set_eps))
-        inv_sigma = nn.Power(-1)(sigma_set)
+        inv_sigma = nn.Power(-1)(sigma_set_eps)
 
         det_sigma_2_pi = nn.AddConstant(inputSize * torch.log(2 * math.pi))
         (det_log_sigma_set)
