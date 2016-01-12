@@ -8,7 +8,7 @@ function YHat:__init()
 
    -- if flag opt.isCovarianceFull true then input represents fill covariance
    if opt.isCovarianceFull then
-        self.sizeCovarianceInput = opt.inputSize * opt.numMixture * opt.dimSize
+        self.sizeCovarianceInput = opt.inputSize * opt.numMixture
    
    -- otherwise the input represents the main axis of a diagonal covariance
    else
