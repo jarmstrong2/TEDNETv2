@@ -109,7 +109,7 @@ function getValLoss()
        
             pi, mu, sigma = unpack(output_y[t])
 
-            loss = clones.criterion[t]:forward({pi:float(), mu:float(), u:float(),
+            loss = clones.criterion[t]:forward({pi:float(), mu:float(), sigma:float(),
                cmaskMat[{{},{},{t}}]:float(), x_target:float(), eps}):sum() + loss  
             -- loss = clones.criterion[t]:forward({pi:cuda(), mu:cuda(), sigma:cuda(),
             --     cmaskMat[{{},{},{t}}]:cuda(), x_target:cuda(), eps}):sum() + loss       
@@ -204,7 +204,7 @@ function feval(x)
        
             pi, mu, sigma = unpack(output_y[t])
 
-            input_crit[t] = {pi:float(), mu:float(), u:float(),
+            input_crit[t] = {pi:float(), mu:float(), sigma:float(),
             cmaskMat[{{},{},{t}}]:float(), x_target:float(), eps}
 
             -- input_crit[t] = {pi:cuda(), mu:cuda(), sigma:cuda(),
