@@ -52,7 +52,7 @@ local h4 = LSTMHN.lstm(opt.inputSize, opt.hiddenSize)({input_xin, w_vector, h3_h
 local h4_c = nn.SelectTable(1)(h4)
 local h4_h = nn.SelectTable(2)(h4)
 local reluout = nn.ReLU()(nn.Linear(opt.hiddenSize*4, (opt.numMixture + (opt.inputSize * opt.numMixture) +
-    (opt.inputSize * opt.numMixture * opt.dimSize)))
+    (opt.inputSize * opt.numMixture)))
         (nn.JoinTable(2)({h1_h, h2_h, h3_h, h4_h})))
 
 local y = nn.YHat()(reluout)
